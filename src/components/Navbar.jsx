@@ -9,6 +9,7 @@ export const Navbar = () => {
         <div>
             <h1>hasim</h1>
             <h1>hsdim</h1>
+            <h1>hasim</h1>
         </div>
         <div>
             <NavLink to="/login"><button className="btn">Login</button></NavLink>
