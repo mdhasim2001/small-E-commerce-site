@@ -1,73 +1,78 @@
-import { NavLink } from "react-router-dom"
+import { FaShoppingCart } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
-    <div className="flex items-center justify-between p-3">
-        <div className="">
-            <a className="btn btn-ghost text-xl">Nana</a>
+    <div className="border-b">
+      {/* navbar top */}
+      <div className="flex items-center justify-between border-b text-[14px]">
+        <div>
+          <p className="pl-5">
+            FREE delivery & 40% Discount for next 3 orders! Place your 1st order
+            in.
+          </p>
+        </div>
+        <div className="flex items-center justify-center">
+          <p className="py-3 px-5 cursor-pointer border-l border-r">Eng</p>
+          <p className="py-3 px-5 cursor-pointer border-l border-r">$ USD</p>
+          <p className="py-3 px-5 cursor-pointer border-l border-r">
+            Track Order
+          </p>
+          <p className="py-3 px-5 cursor-pointer border-l border-r">
+            Help Center
+          </p>
+        </div>
+      </div>
+
+      {/* navbar midil */}
+      <div className="flex items-center justify-between py-8 px-5">
+        <div>
+          <Link to="/" className="uppercase text-3xl">
+            hasim
+          </Link>
         </div>
         <div>
-            <h1>hasim</h1>
-            <h1>hsdim</h1>
-            <h1>hasim</h1>
+          <select className="py-2 px-5 border">
+            <option disabled selected>
+              All Categore
+            </option>
+            <option>Small Apple</option>
+            <option>Small Orange</option>
+            <option>Small Tomato</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="py-2 px-5 border w-96"
+          />
         </div>
+        <div className="flex items-center gap-5">
+          <p className="w-3">
+            <FaShoppingCart />
+          </p>
+          <Link to="/login">Login</Link>
+        </div>
+      </div>
+
+      {/* navlink  */}
+      <div className="flex items-center justify-between pb-5">
         <div>
-            <NavLink to="/login"><button className="btn">Login</button></NavLink>
+          <Link to="/" className="uppercase mx-5 py-1 pr-3">
+            home
+          </Link>
+          <Link className="uppercase mx-5 py-1 px-3">Shop</Link>
+          <Link className="uppercase mx-5 py-1 px-3">about</Link>
+          <Link className="uppercase mx-5 py-1 px-3">contact</Link>
         </div>
-        <div className="hidden">
-            <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                <div className="indicator">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <span className="badge badge-sm indicator-item">8</span>
-                </div>
-            </div>
-            
-            <div
-                tabIndex={0}
-                className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-                <div className="card-body">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                    <button className="btn btn-primary btn-block">View cart</button>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                    <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                </div>
-            </div>
-                <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li>
-                    <a className="justify-between">
-                        Profile
-                        <span className="badge">New</span>
-                    </a>
-                    </li>
-                    <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
-                </ul>
-            </div>
+        <div className="mr-5">
+          <p>
+            Hotline:{" "}
+            <samp className="text-red-500 underline cursor-pointer">
+              +880 1745-83739
+            </samp>
+          </p>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
