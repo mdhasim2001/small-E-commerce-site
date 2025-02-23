@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 
 const MainLayout = () => {
   return (
@@ -8,7 +8,7 @@ const MainLayout = () => {
       <div className="">
         <Navbar />
       </div>
-      <div className="mb-10 px-5">
+      <div className="mb-10">
         <Outlet />
       </div>
       <div>
