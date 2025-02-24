@@ -31,8 +31,8 @@ export const Navbar = () => {
       {/* navbar midil */}
       <div className="flex items-center justify-between py-8 px-5">
         <div>
-          <Link to="/" className="uppercase text-3xl">
-            NANASHOP
+          <Link to="/" className=" text-3xl font-bold">
+            NANA<span className="text-red-600">.</span>com
           </Link>
         </div>
         <div className="border border-black rounded-full flex items-center justify-center">
