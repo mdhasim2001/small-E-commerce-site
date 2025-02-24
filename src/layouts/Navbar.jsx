@@ -55,19 +55,31 @@ export const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center gap-5 text-2xl">
-          <Link>
-            <MdOutlineMessage />
-          </Link>
+        <div className="flex items-center justify-center text-xl gap-5">
+          {/* <div className="relative">
+            <div>
+              <Link>
+                <MdOutlineMessage />
+              </Link>
+            </div>
+            <div className="absolute right-0 w-[250px] h-[50vh] bg-white border"></div>
+          </div>
           <Link>
             <GoChecklist />
-          </Link>
-          <Link className="">
-            <LuShoppingCart />
-          </Link>
-          <Link to="/login">
-            <FaRegUserCircle />
-          </Link>
+          </Link> */}
+          <div className="relative">
+            <Link to="/shop-card">
+              <LuShoppingCart />
+            </Link>
+            <p className="absolute text-[10px] flex items-center justify-center rounded-full bg-red-600 -top-2 -right-2 w-3 text-white h-3 p-1">
+              1
+            </p>
+          </div>
+          <div>
+            <Link to="/login">
+              <FaRegUserCircle />
+            </Link>
+          </div>
         </div>
       </div>
 

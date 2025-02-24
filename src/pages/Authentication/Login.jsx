@@ -63,7 +63,7 @@ export const Login = () => {
           <Link className="my-3">Forgotten Password</Link>
           <div className="flex justify-end">
             <button className="uppercase w-full py-3 px-5 rounded-xl mt-5 bg-blue-600 text-white">
-              login
+              Sign in
             </button>
           </div>
         </form>
