@@ -37,9 +37,7 @@ export const Navbar = () => {
         </div>
         <div className="border border-black rounded-full flex items-center justify-center">
           <select className="py-2 px-2 rounded-l-full border-r border-black outline-none">
-            <option disabled selected>
-              All Categore
-            </option>
+            <option disabled>All Categore</option>
             <option>Small Apple</option>
             <option>Small Orange</option>
             <option>Small Tomato</option>
