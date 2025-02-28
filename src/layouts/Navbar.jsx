@@ -4,6 +4,7 @@ import { GoChecklist } from "react-icons/go";
 import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { IoIosList } from "react-icons/io";
 
 export const Navbar = () => {
   return (
@@ -22,33 +23,27 @@ export const Navbar = () => {
           <p className="py-3 px-5 cursor-pointer border-l border-r">
             Track Order
           </p>
-          <p className="py-3 px-5 cursor-pointer border-l border-r">
+          {/* <p className="py-3 px-5 cursor-pointer border-l border-r">
             Help Center
-          </p>
+          </p> */}
         </div>
       </div>
 
       {/* navbar midil */}
-      <div className="flex items-center justify-between py-8 px-5">
+      <div className="flex items-center justify-between py-5 px-5">
         <div>
           <Link to="/" className=" text-3xl font-bold">
-            NANA<span className="text-red-600">.</span>com
+            NANA<span className="text-orange-500">.</span>com
           </Link>
         </div>
-        <div className="border border-black rounded-full flex items-center justify-center">
-          <select className="py-2 px-2 rounded-l-full border-r border-black outline-none">
-            <option disabled>All Categore</option>
-            <option>Small Apple</option>
-            <option>Small Orange</option>
-            <option>Small Tomato</option>
-          </select>
-          <div className="relative">
+        <div className="border border-black rounded-full">
+          <div className="relative ">
             <input
               type="text"
               placeholder="Type here"
-              className="py-2 px-5 border-none outline-none w-96 rounded-r-full"
+              className="w-[500px] py-2 px-5 border-none rounded-full"
             />
-            <div className="absolute right-2 top-0 p-1 h-full rounded-r-full flex items-center justify-center">
+            <div className="absolute right-0 bg-orange-500 top-0 w-16 text-white h-full rounded-r-full flex items-center justify-center">
               <BsSearch className="text-xl" />
             </div>
           </div>
@@ -69,7 +64,7 @@ export const Navbar = () => {
             <Link to="/shop-card">
               <LuShoppingCart />
             </Link>
-            <p className="absolute text-[10px] flex items-center justify-center rounded-full bg-red-600 -top-2 -right-2 w-3 text-white h-3 p-1">
+            <p className="absolute text-[10px] flex items-center justify-center rounded-full bg-orange-500 -top-2 -right-2 w-3 text-white h-3 p-1">
               1
             </p>
           </div>
@@ -82,16 +77,17 @@ export const Navbar = () => {
       </div>
 
       {/* navlink  */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="ml-20 flex items-center justify-center gap-10">
-          <Link>Shop</Link>
-          <Link>About</Link>
-          <Link>Blog</Link>
-          <Link>Contact</Link>
+      <div className="flex items-center justify-between mx-5 mb-5">
+        <div className=" flex items-center justify-center gap-10">
+          <h1 className="cursor-pointer flex items-center gap-1">
+            <IoIosList />
+            All categories
+          </h1>
+          <h1 className="cursor-pointer">Featured selections</h1>
         </div>
-        <div className="flex items-center justify-center gap-10 mr-5">
+        <div className="flex items-center justify-center gap-10">
           <Link>Get the app</Link>
-          <Link>Help center</Link>
+          <Link>Customer service</Link>
         </div>
       </div>
     </div>
