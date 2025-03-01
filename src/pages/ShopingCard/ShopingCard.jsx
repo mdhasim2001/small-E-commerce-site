@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 export const ShopingCard = () => {
+  const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState();
+
+  const handleQuantityPlus = () => {
+    const count = quantity + 1;
+    setQuantity(count);
+  };
+  const handleQuantityMinus = () => {
+    if (quantity === 1) {
+      return quantity;
+    }
+    const count = quantity - 1;
+    setQuantity(count);
+  };
+
   return (
     <div className="w-full my-10 px-5">
       <h1 className="text-3xl font-bold mb-10">Shopping card</h1>
@@ -33,15 +49,9 @@ export const ShopingCard = () => {
                 {/* <p>Min. order : 1 pieces</p>
             <p>Easy return</p> */}
                 <div className="mt-1 flex items-center gap-2">
-                  <button className="px-2 border border-black rounded-full">
-                    -
-                  </button>
-                  <button className="px-2 border border-black rounded-full">
-                    1
-                  </button>
-                  <button className="px-2 border border-black rounded-full">
-                    +
-                  </button>
+                  <button></button>
+                  <p>{quantity}</p>
+                  <button></button>
                 </div>
               </div>
               <div>
@@ -60,14 +70,12 @@ export const ShopingCard = () => {
               {/* <p>Min. order : 1 pieces</p>
             <p>Easy return</p> */}
               <div className="mt-1 flex items-center gap-2">
-                <button className="px-2 border border-black rounded-full">
-                  -
+                <button onClick={handleQuantityMinus} className="text-2xl">
+                  <CiCircleMinus />
                 </button>
-                <button className="px-2 border border-black rounded-full">
-                  1
-                </button>
-                <button className="px-2 border border-black rounded-full">
-                  +
+                <p>{quantity}</p>
+                <button onClick={handleQuantityPlus} className="text-2xl">
+                  <CiCirclePlus />
                 </button>
               </div>
             </div>

@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactStarsRating from "react-awesome-stars-rating";
 
 export const ProductDetails = () => {
   const product = useParams();
   const [ProductDetails, setProductDetails] = useState([]);
-  const { thumbnail, title, price, rating, description } = ProductDetails;
+  const { thumbnail, title, price, rating, brand, description } =
+    ProductDetails;
 
   useEffect(() => {
     axios(`http://localhost:5000/product/${product.id}`).then((res) =>
@@ -24,6 +26,9 @@ export const ProductDetails = () => {
       <div className="">
         <h1 className=" text-2xl font-bold">{title}</h1>
         <p className="mb-3">{description}</p>
+        {/* <p>{rating}</p> */}
+        <p className="font-bold">{brand}</p>
+        <ReactStarsRating className="flex items-center my-5" value={rating} />
         <p className="font-bold text-xl">${price}.00</p>
         <p>Min. order : 1 pieces</p>
         <p>Easy return</p>
