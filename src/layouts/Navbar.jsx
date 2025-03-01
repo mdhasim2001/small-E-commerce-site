@@ -10,7 +10,7 @@ export const Navbar = () => {
   return (
     <div className="border-b">
       {/* navbar top */}
-      <div className="flex items-center justify-between border-b text-[14px]">
+      <div className="lg:flex items-center justify-between border-b text-[14px] hidden">
         <div>
           <p className="pl-5">
             FREE delivery & 40% Discount for next 3 orders! Place your 1st order
@@ -41,7 +41,7 @@ export const Navbar = () => {
             <input
               type="text"
               placeholder="Type here"
-              className="w-[500px] py-2 px-5 border-none rounded-full"
+              className="hidden md:flex md:w-[500px] py-2 px-5 border-none rounded-full"
             />
             <div className="absolute right-0 bg-orange-500 top-0 w-16 text-white h-full rounded-r-full flex items-center justify-center">
               <BsSearch className="text-xl" />
@@ -77,7 +77,7 @@ export const Navbar = () => {
       </div>
 
       {/* navlink  */}
-      <div className="flex items-center justify-between mx-5 mb-5">
+      <div className="md:flex items-center justify-between mx-5 mb-5">
         <div className=" flex items-center justify-center gap-10">
           <h1 className="cursor-pointer flex items-center gap-1">
             <IoIosList />
@@ -85,7 +85,7 @@ export const Navbar = () => {
           </h1>
           <h1 className="cursor-pointer">Featured selections</h1>
         </div>
-        <div className="flex items-center justify-center gap-10">
+        <div className="hidden md:flex items-center justify-center gap-10">
           <Link>Get the app</Link>
           <Link>Customer service</Link>
         </div>

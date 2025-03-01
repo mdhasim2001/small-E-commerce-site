@@ -16,7 +16,7 @@ export const GetProdutInspiration = () => {
       <div className="mb-10">
         <h1 className="text-3xl font-bold">Get produt inspiration</h1>
       </div>
-      <div className="grid grid-cols-5 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
         {products.map((product) => (
           <Link
             to={`product/details/${product._id}`}
@@ -24,7 +24,7 @@ export const GetProdutInspiration = () => {
             className=" shadow p-2 rounded-lg cursor-pointer"
           >
             <img
-              className="rounded-lg mb-3 w-full h-[30vh]"
+              className="rounded-lg mb-3 w-full md:h-[30vh]"
               src={product.thumbnail}
               alt=""
             />

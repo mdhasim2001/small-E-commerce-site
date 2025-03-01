@@ -7,9 +7,9 @@ export const ShopingCard = () => {
       <h1 className="text-3xl font-bold mb-10">Shopping card</h1>
 
       {/* shoppint card  */}
-      <div className="flex justify-between gap-5">
-        <div className="w-[65%] border-t p-10">
-          <div className="flex justify-around gap-5 mb-5 shadow-sm p-1">
+      <div className="md:flex justify-between gap-5">
+        <div className="md:w-[65%] border-t md:p-10">
+          <div className="md:flex justify-around gap-5 mb-5 shadow-sm p-1">
             <img
               className="w-[150px] h-[150px] rounded-lg"
               src="https://s.alicdn.com/@sc04/kf/Hbd58ba70ce5c4c5eb2cb559263abcf6dQ.jpg_480x480.jpg"
@@ -36,18 +36,21 @@ export const ShopingCard = () => {
               </div>
             </div>
             <div>
-              <button className="text-2xl">
+              <button className="text-2xl hidden md:block">
                 <RiDeleteBin6Line />
               </button>
             </div>
-            <div>
+            <div className="flex items-center md:items-start gap-10">
+              <button className="text-2xl md:hidden">
+                <RiDeleteBin6Line />
+              </button>
               <p className="font-bold text-xl">$520.00</p>
             </div>
           </div>
         </div>
 
         {/* order summary  */}
-        <div className="w-[30%] shadow-lg p-5">
+        <div className="md:w-[30%] mt-10 md:mt-0 shadow-lg p-5">
           <h1 className="font-bold text-xl mb-5">
             Order summary (3 variations)
           </h1>

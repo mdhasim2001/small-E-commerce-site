@@ -11,7 +11,7 @@ export const TopRanking = () => {
           View more <FaArrowRightLong />
         </Link>
       </div>
-      <div className="grid grid-cols-8 gap-5 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-8 gap-5 mt-10">
         <div className=" shadow p-2 rounded-lg cursor-pointer">
           <img
             className="rounded-lg mb-3 w-full h-[15vh]"
