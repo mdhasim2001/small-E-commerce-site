@@ -24,7 +24,7 @@ export const ProductDetails = () => {
       <div className="">
         <h1 className=" text-2xl font-bold">{title}</h1>
         <p className="mb-3">{description}</p>
-        <p className="font-bold text-xl">$520.00</p>
+        <p className="font-bold text-xl">${price}.00</p>
         <p>Min. order : 1 pieces</p>
         <p>Easy return</p>
         <button className="bg-orange-500 py-2 px-5 text-[12px] font-bold mt-5 rounded-full text-white">

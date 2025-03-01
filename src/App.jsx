@@ -6,7 +6,6 @@ import { ShopingCard } from "./pages/ShopingCard/ShopingCard";
 import { Login } from "./pages/Authentication/Login";
 import { Register } from "./pages/Authentication/Register";
 import { ProductDetails } from "./components/scrollToTop/ProductDetails";
-import { Shop } from "./pages/shop/shop";
 
 export const App = () => {
   return (
@@ -17,7 +16,6 @@ export const App = () => {
           <Route index path="/" element={<Home />} />
           <Route path="shop-card" element={<ShopingCard />} />
           <Route path="product/details/:id" element={<ProductDetails />} />
-          <Route path="shop" element={<Shop />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
