@@ -12,7 +12,7 @@ export const GetProdutInspiration = () => {
   }, [products]);
 
   return (
-    <div className="bg-gray-50 py-20 mt-20 px-5">
+    <div className=" py-20 mt-20 px-5">
       <div className="mb-10">
         <h1 className="text-3xl font-bold">Get produt inspiration</h1>
       </div>
@@ -21,7 +21,7 @@ export const GetProdutInspiration = () => {
           <Link
             to={`product/details/${product._id}`}
             key={product._id}
-            className=" shadow p-2 rounded-lg cursor-pointer"
+            className=" bg-white p-2 cursor-pointer"
           >
             <img
               className="rounded-lg mb-3 w-full md:h-[30vh]"

@@ -6,6 +6,8 @@ import { ShopingCard } from "./pages/ShopingCard/ShopingCard";
 import { Login } from "./pages/Authentication/Login";
 import { Register } from "./pages/Authentication/Register";
 import { ProductDetails } from "./components/scrollToTop/ProductDetails";
+import { Profile } from "./pages/profile/Profile";
+import { PrivetRouter } from "./context/PrivetRouter";
 
 export const App = () => {
   return (
@@ -16,6 +18,14 @@ export const App = () => {
           <Route index path="/" element={<Home />} />
           <Route path="shop-card" element={<ShopingCard />} />
           <Route path="product/details/:id" element={<ProductDetails />} />
+          <Route
+            path="profile"
+            element={
+              <PrivetRouter>
+                <Profile />
+              </PrivetRouter>
+            }
+          ></Route>
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

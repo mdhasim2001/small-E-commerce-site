@@ -6,7 +6,7 @@ import img from "../../assets/img.jpg";
 export const Wellcome = () => {
   return (
     <div>
-      <div className="bg-gray-100 px-5 md:px-16 py-10 md:flex items-center justify-between rounded-lg my-10">
+      <div className="bg-white px-5 md:px-16 py-10 md:flex items-center justify-between rounded-lg my-10">
         <h1 className="text-2xl font-bold">Wellcome to NANASHOP</h1>
         <div className="md:flex items-center justify-center gap-5">
           <Link className="flex items-center gap-2 md:justify-center">

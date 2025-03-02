@@ -5,8 +5,11 @@ import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IoIosList } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../context/UserContext";
 
 export const Navbar = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="border-b">
       {/* navbar top */}
@@ -69,7 +72,7 @@ export const Navbar = () => {
             </p>
           </div>
           <div>
-            <Link to="/login">
+            <Link to="profile">
               <FaRegUserCircle />
             </Link>
           </div>

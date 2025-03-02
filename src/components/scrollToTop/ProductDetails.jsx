@@ -18,10 +18,10 @@ export const ProductDetails = () => {
   return (
     <div
       key={product._id}
-      className="grid grid-cols-1 md:grid-cols-2 gap-5 mx-5 lg:w-3/4 lg:mx-auto my-10"
+      className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-white p-5 mx-5 lg:w-3/4 lg:mx-auto my-10"
     >
       <div>
-        <img className="rounded-lg mb-3 w-full" src={thumbnail} alt="" />
+        <img className="rounded-lg mb-3 w-3/4 mx-auto" src={thumbnail} alt="" />
       </div>
       <div className="">
         <h1 className=" text-2xl font-bold">{title}</h1>

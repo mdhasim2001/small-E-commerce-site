@@ -4,8 +4,8 @@ import { Footer } from "./Footer";
 
 const MainLayout = () => {
   return (
-    <div>
-      <div className="">
+    <div className="bg-gray-100">
+      <div className="bg-white">
         <Navbar />
       </div>
       <div className="mb-10">

@@ -1,7 +1,28 @@
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/UserContext";
 
 export const Login = () => {
+  const { userSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
+
+  const handleUserSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    userSignIn(email, password)
+      .then((result) => {
+        if (result) {
+          form.reset();
+          navigate(location?.pathname ? location.state : "/");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="md:w-2/4 mx-auto my-10">
       <div className=" p-5 shadow rounded-lg">
@@ -14,7 +35,7 @@ export const Login = () => {
             </Link>
           </p>
         </div>
-        <form className="">
+        <form onSubmit={handleUserSignIn}>
           <div className="mb-3">
             <p className="mb-3">Account</p>
             <label className="input input-bordered flex items-center gap-2">

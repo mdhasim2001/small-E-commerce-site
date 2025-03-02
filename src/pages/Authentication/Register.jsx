@@ -1,19 +1,24 @@
 import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
 
 export const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleUserRagister = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
     createUser(email, password)
-      .then((result) => console.log(result))
+      .then((result) => {
+        if (result) {
+          form.reset();
+          navigate("/");
+        }
+      })
       .catch((err) => console.log(err));
   };
   return (

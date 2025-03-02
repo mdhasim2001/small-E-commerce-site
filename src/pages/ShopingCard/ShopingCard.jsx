@@ -19,56 +19,29 @@ export const ShopingCard = () => {
   };
 
   return (
-    <div className="w-full my-10 px-5">
-      <h1 className="text-3xl font-bold mb-10">Shopping card</h1>
+    <div className="w-full px-5">
+      <h1 className="p-2 font-bold">Shopping card</h1>
 
       {/* shoppint card  */}
-      <div className="md:flex justify-between gap-5">
-        <div className="md:w-[65%] border-t md:p-10">
-          <div className="md:flex justify-around gap-5 mb-5 shadow-sm p-1">
+      <div className=" flex justify-around gap-5">
+        <div className="w-[65%]">
+          <div className="md:flex justify-around bg-white gap-5 mb-5 shadow-sm p-5">
             <img
-              className="w-[150px] h-[150px] rounded-lg hidden md:block"
+              className="w-16 h-16 rounded-lg hidden md:block"
               src="https://s.alicdn.com/@sc04/kf/Hbd58ba70ce5c4c5eb2cb559263abcf6dQ.jpg_480x480.jpg"
               alt=""
             />
             {/* for mobail */}
-            <div className="md:hidden flex justify-center gap-1">
-              <div className="w-[30%]">
-                <img
-                  className="w-[50px] h-[50px] rounded-lg"
-                  src="https://s.alicdn.com/@sc04/kf/Hbd58ba70ce5c4c5eb2cb559263abcf6dQ.jpg_480x480.jpg"
-                  alt=""
-                />
-              </div>
+            <div className="">
               <div>
-                <h1>
-                  Christmas Glow Toys LED Flashing Party Favor Kids Glow in the
-                  Night Toys Halloween Graduation Party Decorations
-                </h1>
+                <h1>Christmas Glow Toys LED Flashing</h1>
                 <p className="font-bold text-xl">$520.00</p>
                 {/* <p>Min. order : 1 pieces</p>
             <p>Easy return</p> */}
-                <div className="mt-1 flex items-center gap-2">
-                  <button></button>
-                  <p>{quantity}</p>
-                  <button></button>
-                </div>
-              </div>
-              <div>
-                <button className="text-2xl">
-                  <RiDeleteBin6Line />
-                </button>
               </div>
             </div>
-
-            <div className="hidden md:block">
-              <h1>
-                Christmas Glow Toys LED Flashing Party Favor Kids Glow in the
-                Night Toys Halloween Graduation Party Decorations
-              </h1>
+            <div className="">
               <p className="font-bold text-xl">$520.00</p>
-              {/* <p>Min. order : 1 pieces</p>
-            <p>Easy return</p> */}
               <div className="mt-1 flex items-center gap-2">
                 <button onClick={handleQuantityMinus} className="text-2xl">
                   <CiCircleMinus />
@@ -84,14 +57,11 @@ export const ShopingCard = () => {
                 <RiDeleteBin6Line />
               </button>
             </div>
-            <div className="hidden md:flex items-center md:items-start gap-10">
-              <p className="font-bold text-xl">$520.00</p>
-            </div>
           </div>
         </div>
 
         {/* order summary  */}
-        <div className="md:w-[30%] mt-10 md:mt-0 shadow-lg p-5">
+        <div className="md:w-[30%] bg-white mt-10 md:mt-0 shadow-lg p-5">
           <h1 className="font-bold text-xl mb-5">
             Order summary (3 variations)
           </h1>
