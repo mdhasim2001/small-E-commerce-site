@@ -1,7 +1,21 @@
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/UserContext";
 
 export const Register = () => {
+  const { createUser } = useContext(AuthContext);
+
+  const handleUserRagister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    createUser(email, password)
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="md:w-2/4 mx-auto my-10">
       <div className=" p-5 shadow rounded-lg">
@@ -14,7 +28,7 @@ export const Register = () => {
             </Link>
           </p>
         </div>
-        <form className="">
+        <form onSubmit={handleUserRagister}>
           <div className="mb-3">
             <p className="mb-3">Account</p>
             <label className="input input-bordered flex items-center gap-2">
