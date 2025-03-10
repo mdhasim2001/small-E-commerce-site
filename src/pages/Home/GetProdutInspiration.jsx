@@ -9,7 +9,7 @@ export const GetProdutInspiration = () => {
     axios("http://localhost:5000/products").then((res) =>
       setProducts(res.data)
     );
-  }, [products]);
+  }, []);
 
   return (
     <div className=" py-20 mt-20 px-5">

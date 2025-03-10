@@ -4,18 +4,22 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 export const ShopingCard = () => {
   const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(520);
 
   const handleQuantityPlus = () => {
     const count = quantity + 1;
+    const sum = totalPrice + 520;
     setQuantity(count);
+    setTotalPrice(sum);
   };
   const handleQuantityMinus = () => {
     if (quantity === 1) {
       return quantity;
     }
     const count = quantity - 1;
+    const sum = totalPrice - 520;
     setQuantity(count);
+    setTotalPrice(sum);
   };
 
   return (
@@ -35,13 +39,13 @@ export const ShopingCard = () => {
             <div className="">
               <div>
                 <h1>Christmas Glow Toys LED Flashing</h1>
-                <p className="font-bold text-xl">$520.00</p>
+                <p className="font-bold text-xl">$520.36</p>
                 {/* <p>Min. order : 1 pieces</p>
             <p>Easy return</p> */}
               </div>
             </div>
             <div className="">
-              <p className="font-bold text-xl">$520.00</p>
+              <p className="font-bold text-xl">${totalPrice}</p>
               <div className="mt-1 flex items-center gap-2">
                 <button onClick={handleQuantityMinus} className="text-2xl">
                   <CiCircleMinus />
@@ -63,7 +67,7 @@ export const ShopingCard = () => {
         {/* order summary  */}
         <div className="md:w-[30%] bg-white mt-10 md:mt-0 shadow-lg p-5">
           <h1 className="font-bold text-xl mb-5">
-            Order summary (3 variations)
+            Order summary ({quantity} variations)
           </h1>
           <div className="flex items-center justify-between">
             <div>
@@ -71,14 +75,14 @@ export const ShopingCard = () => {
               <h1>Shipping fee</h1>
             </div>
             <div>
-              <h1>$108.72 </h1>
-              <h1>$1,230.98 </h1>
+              <h1>${totalPrice} </h1>
+              <h1>${quantity * 5} </h1>
             </div>
           </div>
           <hr className="my-5" />
           <div className="flex items-center justify-between font-bold">
             <h1>Subtotal excl. tax</h1>
-            <h1>$1,339.70</h1>
+            <h1>${totalPrice + quantity * 5}</h1>
           </div>
           <div>
             <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
