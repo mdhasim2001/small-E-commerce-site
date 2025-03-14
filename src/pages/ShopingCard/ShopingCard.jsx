@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import axios from "axios";
+import { AuthContext } from "../../context/UserContext";
 
 export const ShopingCard = () => {
+  const { user, loading } = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(520);
+  const [cardProduct, setCardProduct] = useState([]);
+
+  console.log(user);
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    axios(`http://localhost:5000/card-product/?email=${user.email}`).then(
+      (res) => {
+        setCardProduct(res.data);
+      }
+    );
+  }, []);
 
   const handleQuantityPlus = () => {
     const count = quantity + 1;
@@ -23,49 +40,57 @@ export const ShopingCard = () => {
   };
 
   return (
-    <div className="w-full px-5">
+    <div className="w-full md:px-5">
       <h1 className="p-2 font-bold">Shopping card</h1>
 
       {/* shoppint card  */}
-      <div className=" flex justify-around gap-5">
-        <div className="w-[65%]">
-          <div className="md:flex justify-around bg-white gap-5 mb-5 shadow-sm p-5">
-            <img
-              className="w-16 h-16 rounded-lg hidden md:block"
-              src="https://s.alicdn.com/@sc04/kf/Hbd58ba70ce5c4c5eb2cb559263abcf6dQ.jpg_480x480.jpg"
-              alt=""
-            />
-            {/* for mobail */}
-            <div className="">
-              <div>
-                <h1>Christmas Glow Toys LED Flashing</h1>
-                <p className="font-bold text-xl">$520.36</p>
+      <div className=" md:flex justify-around gap-5">
+        <div className="md:w-[65%]">
+          {cardProduct.map((product) => (
+            <div
+              key={product._id}
+              className="grid grid-cols-6 md:grid-cols-5 bg-white gap-5 mb-5 shadow-sm p-3"
+            >
+              <img
+                className="w-16 h-16 col-span-2 md:col-span-1 mx-auto rounded-lg"
+                src={product.thumbnail}
+                alt=""
+              />
+              {/* for mobail */}
+              <div className="col-span-4 md:col-span-2">
+                <div className="flex justify-between gap-2">
+                  <h1>{product.title}</h1>
+                  <button className="md:hidden text-2xl">
+                    <RiDeleteBin6Line />
+                  </button>
+                </div>
+                <p className="font-bold text-xl">${product.price}</p>
                 {/* <p>Min. order : 1 pieces</p>
             <p>Easy return</p> */}
               </div>
-            </div>
-            <div className="">
-              <p className="font-bold text-xl">${totalPrice}</p>
-              <div className="mt-1 flex items-center gap-2">
-                <button onClick={handleQuantityMinus} className="text-2xl">
-                  <CiCircleMinus />
-                </button>
-                <p>{quantity}</p>
-                <button onClick={handleQuantityPlus} className="text-2xl">
-                  <CiCirclePlus />
+              <div className="hidden md:block">
+                <p className="font-bold text-xl">${totalPrice}</p>
+                <div className="mt-1 flex items-center gap-2">
+                  <button onClick={handleQuantityMinus} className="text-2xl">
+                    <CiCircleMinus />
+                  </button>
+                  <p>{quantity}</p>
+                  <button onClick={handleQuantityPlus} className="text-2xl">
+                    <CiCirclePlus />
+                  </button>
+                </div>
+              </div>
+              <div>
+                <button className="hidden md:block text-2xl">
+                  <RiDeleteBin6Line />
                 </button>
               </div>
             </div>
-            <div>
-              <button className="text-2xl hidden md:block">
-                <RiDeleteBin6Line />
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* order summary  */}
-        <div className="md:w-[30%] bg-white mt-10 md:mt-0 shadow-lg p-5">
+        <div className="md:w-[30%] h-max sticky top-10 bg-white mt-10 md:mt-0 shadow-lg p-5">
           <h1 className="font-bold text-xl mb-5">
             Order summary ({quantity} variations)
           </h1>

@@ -28,10 +28,12 @@ export const UserContext = ({ children }) => {
   };
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (currentUser) => {
+    const unSubscrib = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
+
+    return () => unSubscrib();
   }, []);
 
   const authInfo = {
