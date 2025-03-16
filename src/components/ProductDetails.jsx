@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../../context/UserContext";
+import { AuthContext } from "../context/UserContext";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 export const ProductDetails = () => {
@@ -36,6 +36,7 @@ export const ProductDetails = () => {
         email: user.email,
         title,
         price,
+        stock,
         totalPrice: price * quantity,
         thumbnail,
         quantity,
@@ -74,12 +75,22 @@ export const ProductDetails = () => {
             <CiCirclePlus />
           </button>
         </div>
-        <button
-          onClick={() => handleAddToCard()}
-          className="bg-orange-500 py-2 px-5 text-[12px] font-bold mt-5 rounded-full text-white"
-        >
-          Add to card
-        </button>
+        {stock === 0 ? (
+          <button
+            disabled
+            onClick={() => handleAddToCard()}
+            className="bg-gray-600 py-2 px-5 text-[12px] font-bold mt-5 rounded-full text-white"
+          >
+            Add to card
+          </button>
+        ) : (
+          <button
+            onClick={() => handleAddToCard()}
+            className="bg-orange-500 py-2 px-5 text-[12px] font-bold mt-5 rounded-full text-white"
+          >
+            Add to card
+          </button>
+        )}
       </div>
     </div>
   );

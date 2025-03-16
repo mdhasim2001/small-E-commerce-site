@@ -5,9 +5,9 @@ import { Home } from "./pages/Home/Home";
 import { ShopingCard } from "./pages/ShopingCard/ShopingCard";
 import { Login } from "./pages/Authentication/Login";
 import { Register } from "./pages/Authentication/Register";
-import { ProductDetails } from "./components/scrollToTop/ProductDetails";
 import { Profile } from "./pages/profile/Profile";
 import { PrivetRouter } from "./context/PrivetRouter";
+import { ProductDetails } from "./components/ProductDetails";
 
 export const App = () => {
   return (

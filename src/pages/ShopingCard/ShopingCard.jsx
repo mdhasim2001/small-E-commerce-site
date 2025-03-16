@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import axios from "axios";
 import { AuthContext } from "../../context/UserContext";
+import { ProductCount } from "../../components/ProductCount";
 
 export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
   const [cardProduct, setCardProduct] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     if (loading) {
@@ -40,48 +40,11 @@ export const ShopingCard = () => {
       <div className=" md:flex justify-around gap-5">
         <div className="md:w-[65%]">
           {cardProduct.map((product) => (
-            <div
+            <ProductCount
               key={product._id}
-              className="grid grid-cols-6 md:grid-cols-5 bg-white gap-5 mb-5 shadow-sm p-3"
-            >
-              <img
-                className="w-16 h-16 col-span-2 md:col-span-1 mx-auto rounded-lg"
-                src={product.thumbnail}
-                alt=""
-              />
-              {/* for mobail */}
-              <div className="col-span-4 md:col-span-2">
-                <div className="flex justify-between gap-2">
-                  <h1>{product.title}</h1>
-                  <button className="md:hidden text-2xl">
-                    <RiDeleteBin6Line />
-                  </button>
-                </div>
-                <p className="font-bold text-xl">${product.price}</p>
-                {/* <p>Min. order : 1 pieces</p>
-      <p>Easy return</p> */}
-              </div>
-              <div className="hidden md:block">
-                <p className="font-bold text-xl">${product.totalPrice}</p>
-                <div className="mt-1 flex items-center gap-2">
-                  <button className="text-2xl">
-                    <CiCircleMinus />
-                  </button>
-                  <p>{product.quantity}</p>
-                  <button className="text-2xl">
-                    <CiCirclePlus />
-                  </button>
-                </div>
-              </div>
-              <div>
-                <button
-                  onClick={() => handleDelete(product.productId)}
-                  className="hidden md:block text-2xl"
-                >
-                  <RiDeleteBin6Line />
-                </button>
-              </div>
-            </div>
+              product={product}
+              handleDelete={handleDelete}
+            />
           ))}
         </div>
 
@@ -96,7 +59,7 @@ export const ShopingCard = () => {
               <h1>Shipping fee</h1>
             </div>
             <div>
-              <h1>500</h1>
+              <h1>{totalPrice}</h1>
               <h1>525</h1>
             </div>
           </div>
