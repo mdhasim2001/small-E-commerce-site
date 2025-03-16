@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-export const ProductCount = ({ product, handleDelete }) => {
+export const ProductCount = ({
+  product,
+  handleDelete,
+  setSubTotal,
+  subTotal,
+}) => {
   const [totalPrice, setTotalPrice] = useState(product.totalPrice);
   const [productCount, setProductCount] = useState(product.quantity);
 
@@ -21,11 +26,20 @@ export const ProductCount = ({ product, handleDelete }) => {
     setTotalPrice(totalPrice - product.price);
   };
 
+  const handleProductCheck = (e) => {
+    if (e.target.checked) {
+      setSubTotal(subTotal + totalPrice);
+    } else {
+      setSubTotal(subTotal - totalPrice);
+    }
+  };
+
   return (
     <div
       key={product._id}
-      className="grid grid-cols-6 md:grid-cols-5 bg-white gap-5 mb-5 shadow-sm p-3"
+      className="grid grid-cols-6 md:grid-cols-6 bg-white gap-5 mb-5 shadow-sm p-3"
     >
+      <input onChange={handleProductCheck} type="checkbox" className="w-5" />
       <img
         className="w-16 h-16 col-span-2 md:col-span-1 mx-auto rounded-lg"
         src={product.thumbnail}

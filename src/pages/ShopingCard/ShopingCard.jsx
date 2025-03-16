@@ -6,7 +6,7 @@ import { ProductCount } from "../../components/ProductCount";
 export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
   const [cardProduct, setCardProduct] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
     if (loading) {
@@ -44,6 +44,8 @@ export const ShopingCard = () => {
               key={product._id}
               product={product}
               handleDelete={handleDelete}
+              setSubTotal={setSubTotal}
+              subTotal={subTotal}
             />
           ))}
         </div>
@@ -59,14 +61,14 @@ export const ShopingCard = () => {
               <h1>Shipping fee</h1>
             </div>
             <div>
-              <h1>{totalPrice}</h1>
-              <h1>525</h1>
+              <h1>${subTotal.toFixed(2)}</h1>
+              <h1>${((subTotal / 100) * 2).toFixed(2)}</h1>
             </div>
           </div>
           <hr className="my-5" />
           <div className="flex items-center justify-between font-bold">
             <h1>Subtotal excl. tax</h1>
-            <h1></h1>
+            <h1>${((subTotal / 100) * 2 + subTotal).toFixed(2)}</h1>
           </div>
           <div>
             <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
