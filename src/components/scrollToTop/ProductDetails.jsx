@@ -29,19 +29,22 @@ export const ProductDetails = () => {
     );
   }, []);
 
-  // console.log(user.email);
-
   const handleAddToCard = () => {
     axios
-      .post("http://localhost:5000/product", {
-        ProductId: _id,
+      .put("http://localhost:5000/product", {
+        productId: _id,
         email: user.email,
         title,
         price,
+        totalPrice: price * quantity,
         thumbnail,
         quantity,
       })
-      .then((result) => console.log(result.data.cardProduct))
+      .then((res) => {
+        if (res.data) {
+          alert("Your product add to card");
+        }
+      })
       .catch((err) => console.log(err));
   };
 

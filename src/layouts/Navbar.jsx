@@ -5,11 +5,14 @@ import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IoIosList } from "react-icons/io";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/UserContext";
+import axios from "axios";
 
 export const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+  const [cardProduct, setCardProduct] = useState(0);
+
   return (
     <div className="border-b">
       {/* navbar top */}
@@ -68,7 +71,7 @@ export const Navbar = () => {
               <LuShoppingCart />
             </Link>
             <p className="absolute text-[10px] flex items-center justify-center rounded-full bg-orange-500 -top-2 -right-2 w-3 text-white h-3 p-1">
-              1
+              {cardProduct}
             </p>
           </div>
           <div>

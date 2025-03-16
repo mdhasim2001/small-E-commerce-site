@@ -6,11 +6,7 @@ import { AuthContext } from "../../context/UserContext";
 
 export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
-  const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(520);
   const [cardProduct, setCardProduct] = useState([]);
-
-  console.log(user);
 
   useEffect(() => {
     if (loading) {
@@ -23,20 +19,17 @@ export const ShopingCard = () => {
     );
   }, []);
 
-  const handleQuantityPlus = () => {
-    const count = quantity + 1;
-    const sum = totalPrice + 520;
-    setQuantity(count);
-    setTotalPrice(sum);
-  };
-  const handleQuantityMinus = () => {
-    if (quantity === 1) {
-      return quantity;
-    }
-    const count = quantity - 1;
-    const sum = totalPrice - 520;
-    setQuantity(count);
-    setTotalPrice(sum);
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/product/${id}`)
+      .then((res) => {
+        setCardProduct(
+          cardProduct.filter((product) => product.productId !== id)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -66,22 +59,25 @@ export const ShopingCard = () => {
                 </div>
                 <p className="font-bold text-xl">${product.price}</p>
                 {/* <p>Min. order : 1 pieces</p>
-            <p>Easy return</p> */}
+      <p>Easy return</p> */}
               </div>
               <div className="hidden md:block">
-                <p className="font-bold text-xl">${totalPrice}</p>
+                <p className="font-bold text-xl">${product.totalPrice}</p>
                 <div className="mt-1 flex items-center gap-2">
-                  <button onClick={handleQuantityMinus} className="text-2xl">
+                  <button className="text-2xl">
                     <CiCircleMinus />
                   </button>
-                  <p>{quantity}</p>
-                  <button onClick={handleQuantityPlus} className="text-2xl">
+                  <p>{product.quantity}</p>
+                  <button className="text-2xl">
                     <CiCirclePlus />
                   </button>
                 </div>
               </div>
               <div>
-                <button className="hidden md:block text-2xl">
+                <button
+                  onClick={() => handleDelete(product.productId)}
+                  className="hidden md:block text-2xl"
+                >
                   <RiDeleteBin6Line />
                 </button>
               </div>
@@ -92,7 +88,7 @@ export const ShopingCard = () => {
         {/* order summary  */}
         <div className="md:w-[30%] h-max sticky top-10 bg-white mt-10 md:mt-0 shadow-lg p-5">
           <h1 className="font-bold text-xl mb-5">
-            Order summary ({quantity} variations)
+            Order summary ({cardProduct.length} variations)
           </h1>
           <div className="flex items-center justify-between">
             <div>
@@ -100,14 +96,14 @@ export const ShopingCard = () => {
               <h1>Shipping fee</h1>
             </div>
             <div>
-              <h1>${totalPrice} </h1>
-              <h1>${quantity * 5} </h1>
+              <h1>500</h1>
+              <h1>525</h1>
             </div>
           </div>
           <hr className="my-5" />
           <div className="flex items-center justify-between font-bold">
             <h1>Subtotal excl. tax</h1>
-            <h1>${totalPrice + quantity * 5}</h1>
+            <h1></h1>
           </div>
           <div>
             <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
