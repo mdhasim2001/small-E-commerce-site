@@ -84,7 +84,7 @@ export const ProductCount = ({
           >
             <CiCircleMinus />
           </button>
-          {check ? <p>Quantity = {productCount}</p> : <p>{productCount}</p>}
+          {check ? <p>Qty = {productCount}</p> : <p>{productCount}</p>}
           <button
             onClick={handleProductPlus}
             className={`text-2xl ${check ? "hidden" : "block"}`}

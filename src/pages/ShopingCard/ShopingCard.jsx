@@ -31,6 +31,22 @@ export const ShopingCard = () => {
       });
   };
 
+  const handleOrderProduct = () => {
+    orderProduct.map((product) =>
+      axios
+        .put("http://localhost:5000/orderProducts", {
+          user: user.email,
+          order: product,
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    );
+  };
+
   return (
     <div className="w-full md:px-5">
       <h1 className="p-2 font-bold">Shopping card</h1>
@@ -81,7 +97,10 @@ export const ShopingCard = () => {
                   Check out
                 </button>
               ) : (
-                <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
+                <button
+                  onClick={handleOrderProduct}
+                  className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500"
+                >
                   Check out
                 </button>
               )}
