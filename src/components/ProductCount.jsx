@@ -10,6 +10,7 @@ export const ProductCount = ({
 }) => {
   const [totalPrice, setTotalPrice] = useState(product.totalPrice);
   const [productCount, setProductCount] = useState(product.quantity);
+  const [check, setCheck] = useState(false);
 
   const handleProductPlus = () => {
     if (productCount === product.stock) {
@@ -29,15 +30,17 @@ export const ProductCount = ({
   const handleProductCheck = (e) => {
     if (e.target.checked) {
       setSubTotal(subTotal + totalPrice);
+      setCheck(true);
     } else {
       setSubTotal(subTotal - totalPrice);
+      setCheck(false);
     }
   };
 
   return (
     <div
       key={product._id}
-      className="grid grid-cols-6 md:grid-cols-6 bg-white gap-5 mb-5 shadow-sm p-3"
+      className=" grid grid-cols-6 md:grid-cols-6 bg-white gap-5 mb-5 shadow-sm p-3"
     >
       <input onChange={handleProductCheck} type="checkbox" className="w-5" />
       <img
@@ -60,11 +63,17 @@ export const ProductCount = ({
       <div className="hidden md:block">
         <p className="font-bold text-xl">${totalPrice}</p>
         <div className="mt-1 flex items-center gap-2">
-          <button onClick={handleProductMinus} className="text-2xl">
+          <button
+            onClick={handleProductMinus}
+            className={`text-2xl ${check ? "hidden" : "block"}`}
+          >
             <CiCircleMinus />
           </button>
-          <p>{productCount}</p>
-          <button onClick={handleProductPlus} className="text-2xl">
+          {check ? <p>Quantity = {productCount}</p> : <p>{productCount}</p>}
+          <button
+            onClick={handleProductPlus}
+            className={`text-2xl ${check ? "hidden" : "block"}`}
+          >
             <CiCirclePlus />
           </button>
         </div>

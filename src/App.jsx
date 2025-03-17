@@ -17,7 +17,14 @@ export const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index path="/" element={<Home />} />
           <Route path="product/details/:id" element={<ProductDetails />} />
-          <Route path="shop-card" element={<ShopingCard />} />
+          <Route
+            path="shop-card"
+            element={
+              <PrivetRouter>
+                <ShopingCard />
+              </PrivetRouter>
+            }
+          />
           <Route
             path="profile"
             element={

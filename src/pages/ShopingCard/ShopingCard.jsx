@@ -9,10 +9,7 @@ export const ShopingCard = () => {
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
-    axios(`http://localhost:5000/card-product/?email=${user.email}`).then(
+    axios(`http://localhost:5000/card-product?email=${user?.email}`).then(
       (res) => {
         setCardProduct(res.data);
       }
