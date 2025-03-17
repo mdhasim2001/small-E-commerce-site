@@ -8,6 +8,7 @@ import { Register } from "./pages/Authentication/Register";
 import { Profile } from "./pages/profile/Profile";
 import { PrivetRouter } from "./context/PrivetRouter";
 import { ProductDetails } from "./components/ProductDetails";
+import { CheckOut } from "./pages/checkOut/CheckOut";
 
 export const App = () => {
   return (
@@ -33,6 +34,7 @@ export const App = () => {
               </PrivetRouter>
             }
           ></Route>
+          <Route path="checkOut" element={<CheckOut />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

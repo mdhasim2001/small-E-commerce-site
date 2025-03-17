@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/UserContext";
 import { ProductCount } from "../../components/ProductCount";
+import { Link } from "react-router-dom";
 
 export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
@@ -68,9 +69,11 @@ export const ShopingCard = () => {
             <h1>${((subTotal / 100) * 2 + subTotal).toFixed(2)}</h1>
           </div>
           <div>
-            <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
-              Check out
-            </button>
+            <Link to="/checkOut">
+              <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
+                Check out
+              </button>
+            </Link>
           </div>
         </div>
       </div>
