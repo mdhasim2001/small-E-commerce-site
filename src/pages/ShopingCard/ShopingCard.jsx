@@ -49,7 +49,12 @@ export const ShopingCard = () => {
 
   return (
     <div className="w-full md:px-5">
-      <h1 className="p-2 font-bold">Shopping card</h1>
+      <div className="flex items-center justify-between p-2">
+        <h1 className="font-bold">Shopping card</h1>
+        <Link to="/checkOut" className="cursor-pointer font-bold">
+          Pending order
+        </Link>
+      </div>
 
       {/* shoppint card  */}
       <div className=" md:flex justify-around gap-5">

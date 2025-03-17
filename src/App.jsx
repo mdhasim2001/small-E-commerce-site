@@ -34,7 +34,14 @@ export const App = () => {
               </PrivetRouter>
             }
           ></Route>
-          <Route path="checkOut" element={<CheckOut />} />
+          <Route
+            path="checkOut"
+            element={
+              <PrivetRouter>
+                <CheckOut />
+              </PrivetRouter>
+            }
+          />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
