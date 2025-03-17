@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
   const [cardProduct, setCardProduct] = useState([]);
+  const [orderProduct, serOrderProduct] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
@@ -42,6 +43,8 @@ export const ShopingCard = () => {
               key={product._id}
               product={product}
               handleDelete={handleDelete}
+              orderProduct={orderProduct}
+              setOrderProduct={serOrderProduct}
               setSubTotal={setSubTotal}
               subTotal={subTotal}
             />
@@ -70,9 +73,18 @@ export const ShopingCard = () => {
           </div>
           <div>
             <Link to="/checkOut">
-              <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
-                Check out
-              </button>
+              {subTotal === 0 ? (
+                <button
+                  disabled
+                  className="py-3 mt-5 rounded-full w-full border text-white bg-orange-400"
+                >
+                  Check out
+                </button>
+              ) : (
+                <button className="py-3 mt-5 rounded-full w-full border text-white bg-orange-500">
+                  Check out
+                </button>
+              )}
             </Link>
           </div>
         </div>
