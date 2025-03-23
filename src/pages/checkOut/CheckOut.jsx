@@ -12,7 +12,7 @@ export const CheckOut = () => {
 
   // console.log(user.email);
   let subTotalPrice = 0;
-  for (let price of orderProducts) {
+  for (const price of orderProducts) {
     subTotalPrice += price.order.totalPrice;
   }
 
@@ -25,6 +25,19 @@ export const CheckOut = () => {
         console.error(err);
       });
   }, []);
+
+  const handleDeleteOrderProduct = (id) => {
+    axios
+      .delete(`http://localhost:5000/orderProducts/${id}`)
+      .then((res) => {
+        if (res.data) {
+          setOrderProducts(orderProducts.filter((p) => p._id !== id));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     axios("http://localhost:5000/division")
@@ -174,7 +187,10 @@ export const CheckOut = () => {
               </div>
             </div>
             <div>
-              <button className="text-[12px] font-bold text-white py-1 px-2 bg-orange-500 rounded-lg">
+              <button
+                onClick={() => handleDeleteOrderProduct(product._id)}
+                className="text-[12px] font-bold text-white py-1 px-2 bg-orange-500 rounded-lg"
+              >
                 Cancel
               </button>
             </div>
