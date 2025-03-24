@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/UserContext";
 export const CheckOut = () => {
   const { user, loading } = useContext(AuthContext);
   const [orderProducts, setOrderProducts] = useState([]);
+  const [address, setAddress] = useState([]);
 
   const [division, setDivision] = useState([]);
   const [upazila, setUpazila] = useState([]);
@@ -81,9 +82,29 @@ export const CheckOut = () => {
     const zone = form.zone.value;
     const address = form.address.value;
 
-    const userAddress = { name, number, region, city, zone, address };
-    console.log(userAddress);
+    const userAddress = {
+      user: user.email,
+      name,
+      number,
+      region,
+      city,
+      zone,
+      address,
+    };
+    axios.post("http://localhost:5000/users", { userAddress }).then((res) => {
+      if (res.data) {
+        axios(`http://localhost:5000/user?email=${user.email}`).then((res) => {
+          setAddress(res.data);
+        });
+      }
+    });
   };
+
+  useEffect(() => {
+    axios(`http://localhost:5000/user?email=${user.email}`).then((res) => {
+      setAddress(res.data);
+    });
+  }, []);
 
   return (
     <div className="grid grid-cols-2 gap-5 mx-20">
@@ -105,72 +126,94 @@ export const CheckOut = () => {
             <h1>${(subTotalPrice + (subTotalPrice / 100) * 2).toFixed(2)}</h1>
           </div>
         </div>
-        <form onSubmit={handleUserAddress}>
-          <div className="my-3">
-            <input
-              type="text"
-              name="name"
-              required
-              placeholder="Your name"
-              className="w-full p-2"
-            />
+        {address?.email ? (
+          <div>
+            <div className=" p-3 my-5 bg-white">
+              <div className="font-bold mb-2 flex items-center justify-between">
+                <h1>Address</h1>
+                <button className="text-blue-600 text-[12px]">Edit</button>
+              </div>
+              <p className="text-[12px]">
+                {address.address.home},{address.address.zone},{" "}
+                {address.address.city}, {address.address.region}{" "}
+              </p>
+            </div>
+            <button className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500">
+              Proceed to Pay
+            </button>
           </div>
-          <div className="my-3">
-            <input
-              type="text"
-              name="number"
-              required
-              placeholder="Phone number"
-              className="w-full p-2"
-            />
-          </div>
-          <div className="my-3">
-            <select
-              onChange={handleDistrict}
-              name="region"
-              className="w-full p-2"
-            >
-              <option>Region</option>
-              {division.map((d) => (
-                <option key={d.id} value={d.name}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="my-3">
-            <select onChange={handleUpazila} name="city" className="w-full p-2">
-              <option>City</option>
-              {districts.map((d) => (
-                <option key={d.id} value={d.name}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="my-3">
-            <select name="zone" className="w-full p-2">
-              <option>Zone</option>
-              {upazila.map((d) => (
-                <option key={d.id} value={d.name}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="my-3">
-            <input
-              type="text"
-              name="address"
-              required
-              placeholder="Address"
-              className="w-full p-2"
-            />
-          </div>
-          <button className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500">
-            Order confrom
-          </button>
-        </form>
+        ) : (
+          <form onSubmit={handleUserAddress}>
+            <div className="my-3">
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Your name"
+                className="w-full p-2"
+              />
+            </div>
+            <div className="my-3">
+              <input
+                type="text"
+                name="number"
+                required
+                placeholder="Phone number"
+                className="w-full p-2"
+              />
+            </div>
+            <div className="my-3">
+              <select
+                onChange={handleDistrict}
+                name="region"
+                className="w-full p-2"
+              >
+                <option>Region</option>
+                {division.map((d) => (
+                  <option key={d.id} value={d.name}>
+                    {d.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="my-3">
+              <select
+                onChange={handleUpazila}
+                name="city"
+                className="w-full p-2"
+              >
+                <option>City</option>
+                {districts.map((d) => (
+                  <option key={d.id} value={d.name}>
+                    {d.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="my-3">
+              <select name="zone" className="w-full p-2">
+                <option>Zone</option>
+                {upazila.map((d) => (
+                  <option key={d.id} value={d.name}>
+                    {d.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="my-3">
+              <input
+                type="text"
+                name="address"
+                required
+                placeholder="Address"
+                className="w-full p-2"
+              />
+            </div>
+            <button className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500">
+              Address
+            </button>
+          </form>
+        )}
       </div>
       <div>
         {orderProducts.map((product) => (
