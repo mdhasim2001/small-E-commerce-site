@@ -5,8 +5,18 @@ import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IoIosList } from "react-icons/io";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/UserContext";
 
 export const Navbar = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+  const [profile, setProfile] = useState(false);
+
+  const handleUserSignOut = () => {
+    userSignOut();
+    <Navigate to="login" />;
+  };
+
   return (
     <div className="border-b">
       {/* navbar top */}
@@ -68,10 +78,62 @@ export const Navbar = () => {
               {/* {cardProduct.length} */}
             </p>
           </div>
-          <div>
-            <Link to="profile">
-              <FaRegUserCircle />
-            </Link>
+          <div className="relative">
+            {user ? (
+              <div>
+                {profile ? (
+                  <div onClick={() => setProfile(false)}>
+                    <FaRegUserCircle className="cursor-pointer" />
+                  </div>
+                ) : (
+                  <div onClick={() => setProfile(true)}>
+                    <FaRegUserCircle className="cursor-pointer" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex gap-1 items-center">
+                <button>
+                  <Link
+                    to="login"
+                    className="py-2 px-3 rounded-lg text-white text-[15px] bg-orange-500"
+                  >
+                    Sign In
+                  </Link>
+                </button>
+                <button>
+                  <Link
+                    to="register"
+                    className="py-2 px-3 rounded-lg text-white text-[15px] bg-orange-500"
+                  >
+                    Sign Up
+                  </Link>
+                </button>
+              </div>
+            )}
+
+            {user ? (
+              <div>
+                {profile ? (
+                  <div className="absolute w-28 top-7 right-0 bg-white border text-[14px] py-2 px-3">
+                    <Link
+                      onClick={() => setProfile(false)}
+                      className=""
+                      to="profile"
+                    >
+                      My Profile
+                    </Link>
+                    <div onClick={() => setProfile(false)}>
+                      <button onClick={handleUserSignOut}>Log Out</button>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

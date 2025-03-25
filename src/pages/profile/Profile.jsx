@@ -1,16 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/UserContext";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 export const Profile = () => {
-  const { userSignOut } = useContext(AuthContext);
-  const handleUserSignOut = () => {
-    userSignOut();
-    <Navigate to="login" />;
-  };
+  const { user } = useContext(AuthContext);
+  const [userAddress, setUserAddress] = useState([]);
+
+  // const { name, email, number } = userAddress;
+  // const { home, zone, city, region } = userAddress.address;
+
+  useEffect(() => {
+    axios(`http://localhost:5000/user?email=${user.email}`).then((res) => {
+      setUserAddress(res.data);
+    });
+  }, []);
+
   return (
     <div className="mx-10">
-      <button onClick={handleUserSignOut}>Log out</button>
       <div className="w-full my-3 flex gap-5">
         <div className="w-3/4 bg-white p-3 h-max">
           <h1 className="pl-5">My Orders</h1>
@@ -46,22 +53,40 @@ export const Profile = () => {
               Personal Profile | <button className="text-blue-600">Edit</button>
             </h1>
             <div className="my-5 text-[14px] text-gray-600">
-              <p>Name : MD Hasim</p>
-              <p>Email : nana@gmail.com</p>
-              <p>Phone : 000854563565</p>
+              <p>Name : {userAddress.address?.name}</p>
+              <p>Email : {userAddress.email}</p>
+              <p>Phone : {userAddress.address?.number}</p>
             </div>
           </div>
           <div className="bg-white p-3">
-            <h1>
-              Address Book | <button className="text-blue-600">Edit</button>
+            <h1 className="flex items-center gap-1">
+              Address Book{" "}
+              {userAddress ? (
+                <div>
+                  | <button className="text-blue-600">Edit</button>
+                </div>
+              ) : (
+                ""
+              )}
             </h1>
-            <h1 className="font-bold mt-5">MD Hasim</h1>
-            <div className="my-2 text-[14px] text-gray-600">
-              <p>
-                Rajarampur, Chapainawabgonj, Chapainawabgonj Sadar, Rajshahi
-              </p>
-              <p>(+880) 1284748948</p>
-            </div>
+            {userAddress ? (
+              <div>
+                <h1 className="font-bold mt-5">{userAddress.address?.name}</h1>
+                <div className="my-2 text-[14px] text-gray-600">
+                  <p>
+                    {userAddress.address?.home} {userAddress.address?.zone}{" "}
+                    {userAddress.address?.city} {userAddress.address?.region}
+                  </p>
+                  <p>(+880) {userAddress.address?.number}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center p-5">
+                <button className="w-full py-2 bg-gray-100 rounded-lg font-bold">
+                  Add
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -106,6 +106,21 @@ export const CheckOut = () => {
     });
   }, []);
 
+  const handleConfromOrder = () => {
+    // orderProducts.map((product) => {
+    //   console.log(product);
+    //   axios
+    //     .post("http://localhost:5000/confrom-order", {
+    //       user: user.email,
+    //       product,
+    //       address: address.address,
+    //     })
+    //     .then((res) => {
+    //       console.log(res.data);
+    //     });
+    // });
+  };
+
   return (
     <div className="grid grid-cols-2 gap-5 mx-20">
       <div>
@@ -138,7 +153,10 @@ export const CheckOut = () => {
                 {address.address.city}, {address.address.region}{" "}
               </p>
             </div>
-            <button className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500">
+            <button
+              onClick={handleConfromOrder}
+              className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500"
+            >
               Proceed to Pay
             </button>
           </div>
@@ -210,7 +228,7 @@ export const CheckOut = () => {
               />
             </div>
             <button className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500">
-              Address
+              Add Your Address
             </button>
           </form>
         )}

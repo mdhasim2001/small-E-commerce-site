@@ -8,23 +8,24 @@ export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
   const [cardProduct, setCardProduct] = useState([]);
   const [orderProduct, serOrderProduct] = useState([]);
+  const [quantity, setQuantity] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
     axios(`http://localhost:5000/card-product?email=${user?.email}`).then(
       (res) => {
+        console.log(res.data);
         setCardProduct(res.data);
       }
     );
   }, []);
 
   const handleDelete = (id) => {
+    console.log(id);
     axios
       .delete(`http://localhost:5000/product/${id}`)
       .then((res) => {
-        setCardProduct(
-          cardProduct.filter((product) => product.productId !== id)
-        );
+        setCardProduct(cardProduct.filter((product) => product._id !== id));
       })
       .catch((err) => {
         console.log(err);
@@ -32,19 +33,21 @@ export const ShopingCard = () => {
   };
 
   const handleOrderProduct = () => {
-    orderProduct.map((product) =>
+    orderProduct.map((product) => {
       axios
         .put("http://localhost:5000/orderProducts", {
-          user: user.email,
-          order: product,
+          user: product.user,
+          quantity,
+          subTotal,
+          order: product.product,
         })
         .then((res) => {
           console.log(res.data);
         })
         .catch((err) => {
           console.error(err);
-        })
-    );
+        });
+    });
   };
 
   return (
@@ -66,6 +69,8 @@ export const ShopingCard = () => {
               handleDelete={handleDelete}
               orderProduct={orderProduct}
               setOrderProduct={serOrderProduct}
+              quantity={quantity}
+              setQuantity={setQuantity}
               setSubTotal={setSubTotal}
               subTotal={subTotal}
             />
