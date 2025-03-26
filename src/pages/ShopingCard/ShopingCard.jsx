@@ -8,20 +8,18 @@ export const ShopingCard = () => {
   const { user, loading } = useContext(AuthContext);
   const [cardProduct, setCardProduct] = useState([]);
   const [orderProduct, serOrderProduct] = useState([]);
-  const [quantity, setQuantity] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
+  const [sheeping, setSheeping] = useState(0);
 
   useEffect(() => {
     axios(`http://localhost:5000/card-product?email=${user?.email}`).then(
       (res) => {
-        console.log(res.data);
         setCardProduct(res.data);
       }
     );
   }, []);
 
   const handleDelete = (id) => {
-    console.log(id);
     axios
       .delete(`http://localhost:5000/product/${id}`)
       .then((res) => {
@@ -36,13 +34,12 @@ export const ShopingCard = () => {
     orderProduct.map((product) => {
       axios
         .put("http://localhost:5000/orderProducts", {
-          user: product.user,
-          quantity,
-          subTotal,
-          order: product.product,
+          user: user.email,
+          order: product.order,
+          product: product.product,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch((err) => {
           console.error(err);
@@ -54,9 +51,9 @@ export const ShopingCard = () => {
     <div className="w-full md:px-5">
       <div className="flex items-center justify-between p-2">
         <h1 className="font-bold">Shopping card</h1>
-        <Link to="/checkOut" className="cursor-pointer font-bold">
+        {/* <Link to="/checkOut" className="cursor-pointer font-bold">
           Pending order
-        </Link>
+        </Link> */}
       </div>
 
       {/* shoppint card  */}
@@ -69,10 +66,10 @@ export const ShopingCard = () => {
               handleDelete={handleDelete}
               orderProduct={orderProduct}
               setOrderProduct={serOrderProduct}
-              quantity={quantity}
-              setQuantity={setQuantity}
               setSubTotal={setSubTotal}
               subTotal={subTotal}
+              setSheeping={setSheeping}
+              sheeping={sheeping}
             />
           ))}
         </div>
@@ -89,13 +86,13 @@ export const ShopingCard = () => {
             </div>
             <div>
               <h1>${subTotal.toFixed(2)}</h1>
-              <h1>${((subTotal / 100) * 2).toFixed(2)}</h1>
+              <h1>${sheeping.toFixed(2)}</h1>
             </div>
           </div>
           <hr className="my-5" />
           <div className="flex items-center justify-between font-bold">
             <h1>Subtotal excl. tax</h1>
-            <h1>${((subTotal / 100) * 2 + subTotal).toFixed(2)}</h1>
+            <h1>${(subTotal + sheeping).toFixed(2)}</h1>
           </div>
           <div>
             <Link to="/checkOut">

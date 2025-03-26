@@ -7,7 +7,6 @@ export const Login = () => {
   const { userSignIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
 
   const handleUserSignIn = (e) => {
     e.preventDefault();

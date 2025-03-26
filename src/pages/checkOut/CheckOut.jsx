@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const CheckOut = () => {
   const { user, loading } = useContext(AuthContext);
   const [orderProducts, setOrderProducts] = useState([]);
   const [address, setAddress] = useState([]);
+
+  const navigate = useNavigate();
 
   const [division, setDivision] = useState([]);
   const [upazila, setUpazila] = useState([]);
@@ -107,18 +110,27 @@ export const CheckOut = () => {
   }, []);
 
   const handleConfromOrder = () => {
-    // orderProducts.map((product) => {
-    //   console.log(product);
-    //   axios
-    //     .post("http://localhost:5000/confrom-order", {
-    //       user: user.email,
-    //       product,
-    //       address: address.address,
-    //     })
-    //     .then((res) => {
-    //       console.log(res.data);
-    //     });
-    // });
+    orderProducts.map((product) => {
+      axios
+        .post("http://localhost:5000/confrom-order", {
+          user: user.email,
+          order: product.order,
+          product: product.product,
+          address: address.address,
+        })
+        .then((res) => {
+          if (res.data) {
+            axios
+              .delete(`http://localhost:5000/orderProducts/${product._id}`)
+              .then((res) => {
+                navigate("/profile");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        });
+    });
   };
 
   return (
@@ -132,13 +144,13 @@ export const CheckOut = () => {
             </div>
             <div>
               <h1>${subTotalPrice.toFixed(2)}</h1>
-              <h1>${((subTotalPrice / 100) * 2).toFixed(2)}</h1>
+              <h1>${(orderProducts.length * 5).toFixed(2)}</h1>
             </div>
           </div>
           <hr />
           <div className="font-bold flex justify-between mt-3">
             <h1>Subtotal excl. tax</h1>
-            <h1>${(subTotalPrice + (subTotalPrice / 100) * 2).toFixed(2)}</h1>
+            <h1>${(subTotalPrice + orderProducts.length * 5).toFixed(2)}</h1>
           </div>
         </div>
         {address?.email ? (
@@ -153,12 +165,21 @@ export const CheckOut = () => {
                 {address.address.city}, {address.address.region}{" "}
               </p>
             </div>
-            <button
-              onClick={handleConfromOrder}
-              className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500"
-            >
-              Proceed to Pay
-            </button>
+            {orderProducts.length === 0 ? (
+              <button
+                disabled
+                className="w-full text-xl p-2 text-white cursor-pointer bg-orange-200"
+              >
+                Proceed to Pay
+              </button>
+            ) : (
+              <button
+                onClick={handleConfromOrder}
+                className="w-full text-xl p-2 text-white cursor-pointer bg-orange-500"
+              >
+                Proceed to Pay
+              </button>
+            )}
           </div>
         ) : (
           <form onSubmit={handleUserAddress}>
@@ -239,9 +260,9 @@ export const CheckOut = () => {
             key={product._id}
             className="grid grid-cols-5 w-full mt-3 bg-white gap-5 p-3"
           >
-            <img className="w-10 h-10" src={product.order.thumbnail} alt="" />
+            <img className="w-10 h-10" src={product.product.thumbnail} alt="" />
             <div className="col-span-3">
-              <h1>{product.order.title}</h1>
+              <h1>{product.product.title}</h1>
               <div className="flex items-center gap-5">
                 <p className="font-bold">Total : ${product.order.totalPrice}</p>
                 <p>Qty : {product.order.quantity}</p>

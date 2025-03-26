@@ -3,7 +3,7 @@ import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosList } from "react-icons/io";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/UserContext";
@@ -11,10 +11,11 @@ import { AuthContext } from "../context/UserContext";
 export const Navbar = () => {
   const { user, userSignOut } = useContext(AuthContext);
   const [profile, setProfile] = useState(false);
+  const navigate = useNavigate();
 
   const handleUserSignOut = () => {
     userSignOut();
-    <Navigate to="login" />;
+    navigate("/login");
   };
 
   return (

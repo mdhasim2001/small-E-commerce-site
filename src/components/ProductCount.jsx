@@ -7,10 +7,10 @@ export const ProductCount = ({
   handleDelete,
   orderProduct,
   setOrderProduct,
-  quantity,
-  setQuantity,
   setSubTotal,
   subTotal,
+  sheeping,
+  setSheeping,
 }) => {
   const [quantityTotalPrice, setQuantityTotalPrice] = useState(
     product.product.price
@@ -38,12 +38,19 @@ export const ProductCount = ({
   const handleProductCheck = (e) => {
     if (e.target.checked) {
       setSubTotal(subTotal + quantityTotalPrice);
-      setQuantity(quantity + productCount);
+      setSheeping(sheeping + 5);
+      const userProduct = {
+        order: {
+          quantity: productCount,
+          totalPrice: quantityTotalPrice,
+        },
+        product: product.product,
+      };
       setCheck(true);
-      setOrderProduct([...orderProduct, product]);
+      setOrderProduct([...orderProduct, userProduct]);
     } else {
       setSubTotal(subTotal - quantityTotalPrice);
-      setQuantity(quantity - productCount);
+      setSheeping(sheeping - 5);
       setCheck(false);
     }
   };

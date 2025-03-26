@@ -32,7 +32,7 @@ export const GetProdutInspiration = () => {
               R15 this bike most popular expenciv you can buy this
             </h1>
             <div className="">
-              <p className="font-bold text-xl">$520.00</p>
+              <p className="font-bold text-xl">${product.price.toFixed(2)}</p>
               <p>Min. order : 1 pieces</p>
               <p>Easy return</p>
             </div>

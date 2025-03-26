@@ -6,9 +6,7 @@ import axios from "axios";
 export const Profile = () => {
   const { user } = useContext(AuthContext);
   const [userAddress, setUserAddress] = useState([]);
-
-  // const { name, email, number } = userAddress;
-  // const { home, zone, city, region } = userAddress.address;
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
     axios(`http://localhost:5000/user?email=${user.email}`).then((res) => {
@@ -16,35 +14,57 @@ export const Profile = () => {
     });
   }, []);
 
+  useEffect(() => {
+    axios(`http://localhost:5000/confrom-order?email=${user.email}`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  let total = 0;
+  for (const price of product) {
+    total += price.order.totalPrice;
+  }
+
   return (
     <div className="mx-10">
       <div className="w-full my-3 flex gap-5">
         <div className="w-3/4 bg-white p-3 h-max">
-          <h1 className="pl-5">My Orders</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="pl-5">My Orders</h1>
+            <p className="pr-5">Total Amount = {total + product.length * 5}</p>
+          </div>
           <div className="p-5">
-            <div className="flex items-center justify-between bg-white gap-5 mb-5 border-b p-2">
-              <div>
-                <p>1</p>
+            {product.map((p, index) => (
+              <div
+                key={p._id}
+                className="flex items-center justify-between bg-white gap-5 mb-5 border-b p-2"
+              >
+                <div>
+                  <p>{index + 1}</p>
+                </div>
+                <div>
+                  <p>{p._id.slice(-10)}</p>
+                </div>
+                <div>{/* <p>11/5/2025</p> */}</div>
+                <img
+                  className="w-10 h-10 rounded-lg hidden md:block"
+                  src={p.product.thumbnail}
+                  alt=""
+                />
+                <div className="">
+                  <p>Qty = {p.order.quantity}</p>
+                  <p className="font-bold">${p.order.totalPrice}</p>
+                </div>
+                <div>
+                  <p>Pending</p>
+                  <p className="hidden">Receve</p>
+                </div>
               </div>
-              <div>
-                <p>45834758437284</p>
-              </div>
-              <div>
-                <p>11/5/2025</p>
-              </div>
-              <img
-                className="w-10 h-10 rounded-lg hidden md:block"
-                src="https://s.alicdn.com/@sc04/kf/Hbd58ba70ce5c4c5eb2cb559263abcf6dQ.jpg_480x480.jpg"
-                alt=""
-              />
-              <div className="">
-                <p className="font-bold">$520.00</p>
-              </div>
-              <div>
-                <p>Pending</p>
-                <p className="hidden">Receve</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="w-1/4 flex flex-col gap-5">
